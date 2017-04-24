@@ -30,7 +30,6 @@ class TicTacToe {
     result += this.displayDivider();
     return result;
   }
-
   displayDivider() {
     let result = '';
     for (let i = 0; i < (this.board[0].length * 4) + 1; i++) {
@@ -50,7 +49,6 @@ class TicTacToe {
   setSpot(x, y, type) {
     this.board[y - 1][x - 1] = this.map[type];
   }
-
   checkWinner() {
     let sum = 0;
     for (let i = 0; i < this.board.length; i++) { // Check each row
@@ -75,7 +73,6 @@ class TicTacToe {
     if (sum === -this.board.length) {
       return 'O is a winner';
     }
-
     sum = 0;
     for (let i = 0; i < this.board.length; i++) { // Top Left to bottom right diagnol
       sum += this.board[i][i];
@@ -86,7 +83,6 @@ class TicTacToe {
     if (sum === -this.board.length) {
       return 'O is a winner';
     }
-
     sum = 0;
     for (let i = 0; i < this.board.length; i++) { // Top Right to bottom left diagnol
       sum += this.board[i][this.board.length - (i + 1)];
@@ -97,31 +93,24 @@ class TicTacToe {
     if (sum === -this.board.length) {
       return 'O is a winner';
     }
-
     return false;
   }
 }
 
-module.exports = TicTacToe;
-
 const game = new TicTacToe();
-
 const done = () => {
   console.log(game.checkWinner() || 'Tie');
   console.log(game.display());
   readInput.close();
   process.exit();
 };
-
 let roundNum = 0;
 const runRound = () => {
   if (roundNum > 8) done();
-
   console.log(game.display());
   if (roundNum % 2 === 0) { // Even so player X can go
     let x;
     let y;
-
     readInput.question('Player X enter the coordinates you cant to place a piece at X,Y\n', (input) => {
       [x, y] = input.split(',');
       game.setSpot(x, y, 'x');
@@ -135,7 +124,6 @@ const runRound = () => {
   } else { // Odd so player O can go
     let x;
     let y;
-
     readInput.question('Player O enter the coordinates you cant to place a piece at X,Y\n', (input) => {
       [x, y] = input.split(',');
       game.setSpot(x, y, 'o');
@@ -149,3 +137,4 @@ const runRound = () => {
   }
 };
 runRound();
+module.exports = TicTacToe;
